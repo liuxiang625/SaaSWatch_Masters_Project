@@ -52,7 +52,7 @@ public class ProcessbuilderForExec {
 			SaasConnectionsTrace connection = new SaasConnectionsTrace(matchedResult.group(4),matchedResult.group(5),matchedResult.group(6),matchedResult.group(7));
 			trace.connections.add(connection);
 			sb.append(line).append("\n");
-			System.out.println("Matched: "+ connection);
+			System.out.println("Matched: "+ connection.connectionType);
 		}
 		return sb.toString();
 	}	
