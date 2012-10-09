@@ -41,7 +41,7 @@ public class ProcessbuilderForExec {
 		String line;
 		SaasConnectivityTrace trace = new SaasConnectivityTrace();
 		while((line=br.readLine()) != null){
-			Matcher matchedResult = RegexParsers.test(line);
+			Matcher matchedResult = RegexParsers.lsofParser(line);
 			if(trace.traceTime == null) {
 				trace.traceTime = new Date();
 				trace.agentID = 1;
