@@ -1,25 +1,29 @@
 package traceCollectors;
 
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import com.jezhumble.javasysmon.JavaSysMon;
+
 
 public class ProcessbuilderForNgrep {
 	public static void main(String[] args) throws Exception
 	{
+		JavaSysMon monitor =   new JavaSysMon();
+	    String osName =        monitor.osName();
+	    String workingDirectory = new File("").getAbsolutePath();
+	    int currentPID = monitor.currentPid() ;
+	    System.out.println("OS name: " + osName + "  PID: " + currentPID + "  Working directory: " + workingDirectory);
+		
 		List<String> command = new ArrayList<String>();
 		command.add("/bin/sh");
 		command.add("-c");
 		command.add("lsof -p 512 |grep TCP");
 
-		ProcessBuilder pb = new ProcessBuilder("/bin/bash","/home/xiang/workspaceEE/SaasWatch_SJSU/src/scriptParsers/testScript/NgrepScriptForLinux.sh");
+		ProcessBuilder pb = new ProcessBuilder("/bin/bash",workingDirectory + "/src/scriptParsers/testScript/NgrepScriptForLinux.sh");
 		Process p;
 		try {
 			p = pb.start();

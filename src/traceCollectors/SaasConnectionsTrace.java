@@ -1,6 +1,9 @@
 package traceCollectors;
 
-public class SaasConnectionsTrace {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class SaasConnectionsTrace implements Serializable {
 		public String connectionType;
 		public String connectionSource;
 		public String connectionDestination;

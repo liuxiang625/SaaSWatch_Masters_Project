@@ -25,6 +25,7 @@ public class TraceReceiver implements Runnable,MessageListener, ExceptionListene
 
 	@Override
 	public void onMessage(Message message) {
+		System.out.println("Message Received!");
 		String stopper = null;
 		TextMessage msg = null;
 
@@ -49,6 +50,7 @@ public class TraceReceiver implements Runnable,MessageListener, ExceptionListene
 				if(obj.toString() != "End of transaction"){
 				saasConnectivityTrace = (SaasConnectivityTrace) obj.getObject();
 				System.out.println(saasConnectivityTrace.userTag);
+				System.out.println("Trace connection count " + saasConnectivityTrace.connections.size());
 				}
 			} catch (JMSException e) {
 				// TODO Auto-generated catch block
