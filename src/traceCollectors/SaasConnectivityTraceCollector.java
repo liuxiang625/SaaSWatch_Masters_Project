@@ -21,14 +21,9 @@ public class SaasConnectivityTraceCollector {
 	    String workingDirectory = new File("").getAbsolutePath();
 	    int currentPID = monitor.currentPid() ;
 	    System.out.println("OS name: " + osName + "  PID: " + currentPID + "  Working directory: " + workingDirectory);
-		List<String> command = new ArrayList<String>();
-		command.add("/bin/sh");
-		command.add("-c");
-		command.add("lsof -p "+ currentPID +" |grep TCP");
+
 		ProcessBuilder pb = new ProcessBuilder("/bin/bash",workingDirectory+ "/src/scriptParsers/testScript/lsofScript.sh",""+ 458);///home/xiang/workspaceEE/SaasWatch_SJSU/src/scriptParsers/testScript/lsofScript.sh
 		Process p = pb.start();
-		//String output = loadStream(p.getInputStream());
-		//String error  = loadStream(p.getErrorStream());
 		int rc = p.waitFor();
 		System.out.println("Process ended with rc=" + rc);
 		

@@ -1,4 +1,4 @@
-#OS=`uname`
+OS=`uname`
 #netIf=`ifconfig | grep "Link encap:Ethernet" | cut -d' ' -f1`
 #echo "$OS"
 #echo "$netIf"
@@ -13,4 +13,13 @@
 #disown $_pid
 #sudo kill -9 $_pid
 #exit 1
-bash -c '(sleep 10; sudo kill $$) & exec sudo ngrep -O ./ngrep.dump -d eth0 -t port 80'
+echo "$1"
+echo "$2"
+#bash -c '(sleep 10; sudo kill $$) & exec sudo ngrep -O ./ngrep.dump -d $1 -t port $2'
+#(sleep 10; sudo kill $$) & exec sudo ngrep -O ./ngrep.dump -d $1 -t port $2
+if [ $OS = "Darwin" ]
+then
+(sleep 10; sudo kill $$) & exec sudo ngrep -O ./ngrep.dump -d $1 -t port $2
+else
+bash -c '(sleep 10; sudo kill $$) & exec sudo ngrep -O ./ngrep.dump -d $1 -t port $2'
+fi
