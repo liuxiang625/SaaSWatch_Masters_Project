@@ -54,8 +54,8 @@ public class TraceSender implements Runnable {
 			System.out.println("Sent message: "+ traceToSend.userTag + " : " + Thread.currentThread().getName());
 			producer.send(objMessage);
 			Thread.sleep(70000);
-			producer.send(objMessage);
-			producer.send(stopMessage);
+//			producer.send(objMessage);
+//			producer.send(stopMessage);
 
 			// Clean up
 			session.close();

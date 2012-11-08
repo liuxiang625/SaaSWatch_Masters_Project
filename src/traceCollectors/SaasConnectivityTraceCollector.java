@@ -13,9 +13,8 @@ import com.jezhumble.javasysmon.JavaSysMon;
 
 public class SaasConnectivityTraceCollector {
 
-	public static SaasConnectivityTrace connectionInfoCollector(int agentID, String userTag, Date requestTime) throws Exception
+	public static long connectionListCollector(int agentID, String userTag, Date requestTime) throws Exception
 	{
-		//List<SaasConnectivityTrace> tracesArray = new ArrayList<SaasConnectivityTrace>();
 		JavaSysMon monitor =   new JavaSysMon();
 	    String osName =        monitor.osName();
 	    String workingDirectory = new File("").getAbsolutePath();
@@ -45,15 +44,17 @@ public class SaasConnectivityTraceCollector {
 				trace.SaasPID = Integer.parseInt(matchedResult.group(2));
 				trace.traceType = matchedResult.group(3);
 				SaasConnectionsTrace connection = new SaasConnectionsTrace(matchedResult.group(4),matchedResult.group(5),matchedResult.group(6),matchedResult.group(7));
-				//System.out.println(connection);
 				trace.connections.add(connection);
 				sb.append(line).append("\n");
-				//System.out.println("Matched: "+ connection.connectionType);
 			}
 		}
 		
-		//System.out.println("\nStandard Output/Error:\n");
-		//System.out.println(sb.toString());
-		return trace;
+		Thread sendThread = new Thread(new TraceSender(trace));
+		sendThread.start();
+		System.out.println("Thread Started: " + Thread.currentThread().getName());
+		if (sendThread.isAlive())
+			return sendThread.getId();
+		return 0;
 	}	
+	
 }
