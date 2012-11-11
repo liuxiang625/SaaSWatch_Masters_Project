@@ -24,7 +24,6 @@ public class TraceSender implements Runnable {
 		this.traceToSend = traceToSend;
 	}
 
-	@Override
 	public void run() {
 		try {
 
@@ -49,11 +48,11 @@ public class TraceSender implements Runnable {
 
 
 			ObjectMessage objMessage = session.createObjectMessage(traceToSend);
-			TextMessage stopMessage = session.createTextMessage("End of transaction");
+//			TextMessage stopMessage = session.createTextMessage("End of transaction");
 			// Tell the producer to send the message
 			System.out.println("Sent message: "+ traceToSend.userTag + " : " + Thread.currentThread().getName());
 			producer.send(objMessage);
-			Thread.sleep(70000);
+//			Thread.sleep(70000);
 //			producer.send(objMessage);
 //			producer.send(stopMessage);
 

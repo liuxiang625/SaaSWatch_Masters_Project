@@ -17,13 +17,11 @@ import traceCollectors.SaasConnectivityTrace;
 
 public class TraceReceiver implements Runnable,MessageListener, ExceptionListener {
 
-	@Override
 	public void onException(JMSException arg0) {
 		System.out.println("JMS Exception occured.  Shutting down client.");
 		
 	}
 
-	@Override
 	public void onMessage(Message message) {
 		System.out.println("Message Received!");
 		String stopper = null;
@@ -51,6 +49,7 @@ public class TraceReceiver implements Runnable,MessageListener, ExceptionListene
 				saasConnectivityTrace = (SaasConnectivityTrace) obj.getObject();
 				System.out.println(saasConnectivityTrace.userTag);
 				System.out.println("Trace connection count " + saasConnectivityTrace.connections.size());
+				ServerCommunication.postToServer(saasConnectivityTrace);
 				}
 			} catch (JMSException e) {
 				// TODO Auto-generated catch block
@@ -59,7 +58,6 @@ public class TraceReceiver implements Runnable,MessageListener, ExceptionListene
 		}
 	}	
 
-	@Override
 	public void run() {
 		try {
 			// Create a ConnectionFactory
@@ -80,10 +78,10 @@ public class TraceReceiver implements Runnable,MessageListener, ExceptionListene
 			// Create a MessageConsumer from the Session to the Topic or Queue
 			MessageConsumer consumer = session.createConsumer(destination);
 			consumer.setMessageListener(this);
-
-			        consumer.close();
-			        session.close();
-			        connection.close();
+//
+//			        consumer.close();
+//			        session.close();
+//			        connection.close();
 		} catch (Exception e) {
 			System.out.println("Caught: " + e);
 			e.printStackTrace();

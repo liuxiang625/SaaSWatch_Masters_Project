@@ -10,8 +10,8 @@ public class ConnectivityTraceCollector {
 	ThreadGroup rootThreadGroup = null;
 	static long collectorThreadId;
 	public static void main(String[] args) throws Exception {
-		thread(new TraceReceiver(), false);
-		collectorThreadId = SaasConnectivityTraceCollector. connectionListCollector(1,"Test",new Date());
+		//thread(new TraceReceiver(), false);
+		ConnectionsWatcher. startConnectionWatcher("Test",new Date(),6);
 		System.out.println(collectorThreadId);
 	}
 	

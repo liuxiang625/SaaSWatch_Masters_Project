@@ -4,7 +4,7 @@ import java.util.Date;
 
 import saasWatchAgent.TraceReceiver;
 import traceCollectors.ConnectivityTraceCollector;
-import traceCollectors.SaasConnectivityTraceCollector;
+import traceCollectors.ConnectionsWatcher;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
