@@ -12,6 +12,8 @@ public class ConnectivityTraceCollector {
 	public static void main(String[] args) throws Exception {
 		//thread(new TraceReceiver(), false);
 		ConnectionsWatcher. startConnectionWatcher("Test",new Date(),6);
+		Thread.sleep(600000);   
+		ConnectionsWatcher.setCountinueTracking(false);
 		System.out.println(collectorThreadId);
 	}
 	
